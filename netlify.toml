@@ -1,0 +1,11 @@
+[build]
+  publish = "."
+  command = "node build-script.js $DEPLOY_PRIME_URL || echo 'Warning: Build script requires DEPLOY_PRIME_URL. Please run build-script.js manually after deploy.'"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  DEPLOY_PRIME_URL = "https://YOUR-NETLIFY-DOMAIN.netlify.app"
