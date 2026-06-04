@@ -2189,6 +2189,7 @@
                 sessionStorage.setItem('npv_v1_auth', 'granted');
                 gate.classList.add('unlocked');
                 document.body.style.overflow = '';
+                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
                 setTimeout(function () { gate.style.display = 'none'; }, 900);
             }
 
