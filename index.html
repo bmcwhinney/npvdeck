@@ -298,10 +298,17 @@
                 line-height: 1.65 !important;
             }
             
-            /* Contact section email */
-            #contact p {
+            /* Contact section prose - not the disclaimer */
+            #contact p:not(.legal-note):not(.technical-label) {
                 font-size: 1.05rem !important;
                 line-height: 1.7 !important;
+            }
+            
+            /* Legal disclaimer - always compact */
+            .legal-note {
+                font-size: 0.68rem !important;
+                line-height: 1.55 !important;
+                color: rgba(107, 114, 128, 1) !important;
             }
             
             /* Ensure gray text is readable */
@@ -1720,7 +1727,7 @@
                 <div class="grid grid-cols-2 gap-6 sm:gap-10 border-t border-gray-800 pt-8 sm:pt-12">
                     <div>
                         <p class="technical-label text-gray-500 mb-3 sm:mb-4">Status</p>
-                        <p class="text-base sm:text-lg font-sans font-light tracking-wide">Build Underway</p>
+                        <p class="text-base sm:text-lg font-sans font-light tracking-wide">Pre-Construction</p>
                     </div>
                     <div>
                         <p class="technical-label text-gray-500 mb-3 sm:mb-4">Investor Security</p>
@@ -1754,28 +1761,8 @@
                     <div>
                         <p class="text-4xl sm:text-5xl font-serif font-light italic">18–24<span class="text-lg sm:text-xl font-light text-gray-400"> mo</span></p>
                         <p class="technical-label text-gray-500 mt-2 sm:mt-3">Target Horizon</p>
+                        <p class="text-[10px] font-sans text-gray-400 mt-1 leading-relaxed">Off-plan pre-sale may accelerate</p>
                     </div>
-                </div>
-                <!-- Economics Bridge -->
-                <div class="mt-8 sm:mt-10 border-t border-black/10 pt-8 sm:pt-10 space-y-4 sm:space-y-5">
-                    <p class="technical-label text-gray-400 mb-4 sm:mb-6">Deal Economics</p>
-                    <div class="flex items-baseline justify-between gap-4">
-                        <p class="text-[11px] font-sans font-semibold uppercase tracking-wider text-gray-500">Total Investor Claim</p>
-                        <p class="text-base sm:text-lg font-sans font-light text-black tracking-tight">$740k <span class="text-[10px] text-gray-400 font-normal normal-case tracking-normal">first-priority</span></p>
-                    </div>
-                    <div class="flex items-baseline justify-between gap-4">
-                        <p class="text-[11px] font-sans font-semibold uppercase tracking-wider text-gray-500">Conservative Sale Target</p>
-                        <p class="text-base sm:text-lg font-sans font-light text-black tracking-tight">$1.2M+</p>
-                    </div>
-                    <div class="flex items-baseline justify-between gap-4">
-                        <p class="text-[11px] font-sans font-semibold uppercase tracking-wider text-gray-500">Comparable Market Range</p>
-                        <p class="text-base sm:text-lg font-sans font-light text-black tracking-tight">$1.4M – $4.5M</p>
-                    </div>
-                    <div class="flex items-baseline justify-between gap-4 border-t border-black/10 pt-4">
-                        <p class="text-[11px] font-sans font-semibold uppercase tracking-wider text-npv-yellow">Buffer Above Investor Claim</p>
-                        <p class="text-base sm:text-lg font-sans font-semibold text-npv-yellow tracking-tight">$460k+</p>
-                    </div>
-                    <p class="text-[10px] font-sans text-gray-400 italic leading-relaxed pt-1">Based on conservative $1.2M sale. Comparable luxury villas in Dominica trade at $1.4M–$4.5M (Secret Bay, 2024).</p>
                 </div>
             </div>
             
@@ -1794,39 +1781,68 @@
                     <p class="technical-label text-gray-400 mb-6 sm:mb-8">Capital Allocation</p>
                     <div class="space-y-3 sm:space-y-4">
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <p class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Construction</p>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Construction</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-npv-yellow" style="width: 56%"></div>
                             </div>
-                            <p class="text-[11px] font-sans font-bold text-black w-8 shrink-0">56%</p>
+                            <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">56%</span>
                         </div>
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <p class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Interiors</p>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Interiors</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-black/30" style="width: 18%"></div>
                             </div>
-                            <p class="text-[11px] font-sans font-bold text-black w-8 shrink-0">18%</p>
+                            <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">18%</span>
                         </div>
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <p class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Land</p>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Land</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-black/30" style="width: 14%"></div>
                             </div>
-                            <p class="text-[11px] font-sans font-bold text-black w-8 shrink-0">14%</p>
+                            <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">14%</span>
                         </div>
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <p class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Landscaping</p>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Landscaping</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-black/20" style="width: 6%"></div>
                             </div>
-                            <p class="text-[11px] font-sans font-bold text-black w-8 shrink-0">6%</p>
+                            <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">6%</span>
                         </div>
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <p class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Legal &amp; Marketing</p>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Legal &amp; Marketing</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-black/20" style="width: 6%"></div>
                             </div>
-                            <p class="text-[11px] font-sans font-bold text-black w-8 shrink-0">6%</p>
+                            <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">6%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deal Economics Bridge - Full Width -->
+            <div class="md:col-span-12 reveal">
+                <div class="bg-white p-6 sm:p-10 lg:p-14">
+                    <p class="technical-label text-gray-400 mb-8 sm:mb-10">Exit Economics</p>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10">
+                        <div>
+                            <span class="block text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-400 mb-3">Total Investor Claim</span>
+                            <p class="text-2xl sm:text-3xl font-sans font-light tracking-tight text-black">$740k</p>
+                            <span class="block text-[10px] font-sans text-gray-400 mt-1">4 partners · first priority on exit</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-400 mb-3">Conservative Sale Target</span>
+                            <p class="text-2xl sm:text-3xl font-sans font-light tracking-tight text-black">$1.2M+</p>
+                            <span class="block text-[10px] font-sans text-gray-400 mt-1">Strategic or off-plan exit</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-400 mb-3">Comparable Market</span>
+                            <p class="text-2xl sm:text-3xl font-sans font-light tracking-tight text-black">$1.4M–$4.5M</p>
+                            <span class="block text-[10px] font-sans text-gray-400 mt-1">Dominica luxury villas (Secret Bay, 2024)</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] font-sans font-semibold uppercase tracking-wider text-npv-yellow mb-3">Buffer Above Claim</span>
+                            <p class="text-2xl sm:text-3xl font-sans font-semibold tracking-tight text-npv-yellow">$460k+</p>
+                            <span class="block text-[10px] font-sans text-gray-400 mt-1">Developer margin at conservative target</span>
                         </div>
                     </div>
                 </div>
@@ -1877,32 +1893,33 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-y-12 sm:gap-y-20 w-full">
             <div class="md:col-span-12 reveal">
                 <h2 class="display-serif text-6xl sm:text-8xl md:text-[10rem] lg:text-[12rem] leading-none italic font-light text-black">Cycle.</h2>
+                <p class="text-sm sm:text-base font-sans text-gray-500 mt-4 sm:mt-6 font-semibold uppercase tracking-widest">18–24 Month Target · Off-Plan Pre-Sale May Accelerate Timeline</p>
             </div>
             
             <div class="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 border-t border-black/10 pt-12 sm:pt-16 lg:pt-24">
                 <div class="reveal border-l-2 border-npv-yellow pl-6 sm:pl-8">
                     <p class="technical-label text-npv-yellow mb-3 sm:mb-4">Phase 01</p>
-                    <p class="text-[10px] font-sans font-semibold uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">Q1 2025 · Complete</p>
+                    <p class="text-[10px] font-sans font-semibold uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">Complete</p>
                     <p class="text-xl sm:text-2xl font-serif mb-4 sm:mb-6 italic font-bold">Secured</p>
-                    <p class="text-[12px] sm:text-[14px] font-sans leading-relaxed text-gray-600 font-semibold">Clifftop site acquired. Alien Landholding Tax bypassed via citizen leverage.</p>
+                    <p class="text-[12px] sm:text-[14px] font-sans leading-relaxed text-gray-600 font-semibold">Clifftop site acquired. Alien Landholding Tax bypassed via citizen leverage. Permits and entitlements secured.</p>
                 </div>
                 <div class="reveal border-l-2 border-npv-yellow pl-6 sm:pl-8" style="transition-delay: 150ms;">
                     <p class="technical-label text-npv-yellow mb-3 sm:mb-4">Phase 02</p>
-                    <p class="text-[10px] font-sans font-semibold uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">Q3 2025 · Underway</p>
+                    <p class="text-[10px] font-sans font-semibold uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">Upon Funding Close</p>
                     <p class="text-xl sm:text-2xl font-serif mb-4 sm:mb-6 italic font-bold text-npv-black">Build</p>
-                    <p class="text-[12px] sm:text-[14px] font-sans leading-relaxed text-gray-600 font-semibold">Groundworks and structural build. Duty-free material imports under Tourism Act.</p>
+                    <p class="text-[12px] sm:text-[14px] font-sans leading-relaxed text-gray-600 font-semibold">Groundworks and structural build. Duty-free material imports under the Tourism Incentives Act.</p>
                 </div>
                 <div class="reveal border-l-2 border-npv-yellow pl-6 sm:pl-8" style="transition-delay: 300ms;">
                     <p class="technical-label text-npv-yellow mb-3 sm:mb-4">Phase 03</p>
-                    <p class="text-[10px] font-sans font-semibold uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">Q2 2026 · Active</p>
+                    <p class="text-[10px] font-sans font-semibold uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">~Month 9–14</p>
                     <p class="text-xl sm:text-2xl font-serif mb-4 sm:mb-6 italic font-bold">Curation</p>
-                    <p class="text-[12px] sm:text-[14px] font-sans leading-relaxed text-gray-600 font-semibold">Architectural fit-out. Marketing launch targeting ultra-high-net-worth individuals for private residence acquisition.</p>
+                    <p class="text-[12px] sm:text-[14px] font-sans leading-relaxed text-gray-600 font-semibold">Architectural fit-out and interior curation. Private marketing to UHNWI buyers. Off-plan sale possible at this stage.</p>
                 </div>
                 <div class="reveal border-l-2 border-npv-yellow pl-6 sm:pl-8" style="transition-delay: 450ms;">
                     <p class="technical-label text-npv-yellow mb-3 sm:mb-4">Phase 04</p>
-                    <p class="text-[10px] font-sans font-semibold uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">Q3–Q4 2026 · Target</p>
+                    <p class="text-[10px] font-sans font-semibold uppercase tracking-widest text-gray-400 mb-4 sm:mb-6">~Month 18–24</p>
                     <p class="text-xl sm:text-2xl font-serif mb-4 sm:mb-6 italic font-bold text-npv-black">Exit</p>
-                    <p class="text-[12px] sm:text-[14px] font-sans leading-relaxed text-gray-600 font-semibold">Asset exit via strategic sale. Principal + fixed return redistribution to founding circle.</p>
+                    <p class="text-[12px] sm:text-[14px] font-sans leading-relaxed text-gray-600 font-semibold">Strategic sale or off-plan pre-sale. All investor returns distributed within 30 days of completion of sale.</p>
                 </div>
             </div>
         </div>
@@ -2015,7 +2032,7 @@
                         <p class="technical-label text-gray-600 mb-3 sm:mb-4">Direct</p>
                         <p class="text-lg sm:text-xl md:text-2xl font-sans font-light tracking-tight text-white">invest@newpalmventures.com</p>
                     </div>
-                    <div class="md:ml-auto">
+                    <div class="md:ml-auto mt-2 md:mt-0">
                         <a href="mailto:invest@newpalmventures.com?subject=Villa%20One%20–%20Prospectus%20Request" 
                            class="inline-block px-8 sm:px-12 lg:px-20 py-5 sm:py-6 lg:py-8 border border-npv-yellow text-npv-yellow text-[10px] sm:text-[11px] md:text-[12px] uppercase font-bold tracking-[0.4em] sm:tracking-[0.5em] hover:bg-npv-yellow hover:text-black active:bg-npv-yellow active:text-black transition-all duration-700 cursor-pointer"
                            style="-webkit-tap-highlight-color: rgba(242, 201, 76, 0.3); touch-action: manipulation;"
@@ -2028,7 +2045,7 @@
 
                 <!-- Legal Disclaimer -->
                 <div class="mt-14 sm:mt-20 pt-8 border-t border-white/[0.06]">
-                    <p class="text-[10px] sm:text-[11px] font-sans text-gray-700 leading-relaxed max-w-4xl">
+                    <p class="legal-note text-[10px] sm:text-[11px] font-sans text-gray-700 leading-relaxed max-w-4xl">
                         This document is for informational purposes only and does not constitute a financial promotion, prospectus, or offer of securities. Past performance is not indicative of future results. Prospective investors should conduct their own independent legal, financial, and tax due diligence prior to committing capital. New Palm Ventures Group Ltd is not a regulated financial adviser. All return projections are targets, not guarantees.
                     </p>
                 </div>
