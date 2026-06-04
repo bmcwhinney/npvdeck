@@ -1480,9 +1480,154 @@
                 display: flex !important;
             }
         }
+
+        /* ─── PASSWORD GATE ─────────────────────────────────────────────── */
+        .password-gate {
+            position: fixed;
+            inset: 0;
+            background: #050505;
+            z-index: 999999999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), visibility 0.9s;
+        }
+        .password-gate.unlocked {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .password-gate-logo {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+        .password-gate-rule {
+            width: 36px;
+            height: 1px;
+            background: #F2C94C;
+            margin: 0 auto 2rem;
+        }
+        .password-gate-eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 1.25rem;
+        }
+        .password-gate-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: #F2C94C;
+            line-height: 0.85;
+            margin-bottom: 3rem;
+            letter-spacing: -0.01em;
+        }
+        .password-gate-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.35em;
+            color: rgba(255,255,255,0.25);
+            margin-bottom: 1.25rem;
+        }
+        .password-gate-input {
+            display: block;
+            width: 260px;
+            max-width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.55em;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 0.75rem 0;
+            outline: none;
+            margin-bottom: 2.25rem;
+            transition: border-color 0.3s ease;
+            -webkit-appearance: none;
+        }
+        .password-gate-input:focus {
+            border-bottom-color: #F2C94C;
+        }
+        .password-gate-input::placeholder {
+            color: rgba(255,255,255,0.12);
+            letter-spacing: 0.35em;
+        }
+        .password-gate-input.gate-error {
+            border-bottom-color: rgba(239,68,68,0.5);
+            animation: gate-shake 0.4s ease;
+        }
+        @keyframes gate-shake {
+            0%,100% { transform: translateX(0); }
+            20%     { transform: translateX(-8px); }
+            40%     { transform: translateX(8px); }
+            60%     { transform: translateX(-5px); }
+            80%     { transform: translateX(5px); }
+        }
+        .password-gate-btn {
+            display: inline-block;
+            padding: 1.1rem 3rem;
+            border: 1px solid #F2C94C;
+            color: #F2C94C;
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            cursor: pointer;
+            background: transparent;
+            transition: background 0.5s ease, color 0.5s ease;
+            min-height: 44px;
+        }
+        .password-gate-btn:hover,
+        .password-gate-btn:active {
+            background: #F2C94C;
+            color: #050505;
+        }
+        .password-gate-error-msg {
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(239,68,68,0.6);
+            margin-top: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            min-height: 1em;
+        }
+        .password-gate-error-msg.visible {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="font-sans" style="transform: none !important; perspective: none !important; filter: none !important;">
+
+    <!-- PASSWORD GATE -->
+    <div id="password-gate" class="password-gate">
+        <img src="./npv logo.png" alt="NPV" class="password-gate-logo">
+        <div class="password-gate-rule"></div>
+        <p class="password-gate-eyebrow">V-01 · Private Placement</p>
+        <h1 class="password-gate-heading">Villa One.</h1>
+        <p class="password-gate-label">Enter access code</p>
+        <input id="gate-input" type="text" class="password-gate-input" placeholder="· · · · · · · ·" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" maxlength="20">
+        <button id="gate-btn" class="password-gate-btn">Enter</button>
+        <p id="gate-error-msg" class="password-gate-error-msg">Incorrect code</p>
+    </div>
 
     <!-- LANDSCAPE BLOCKER OVERLAY -->
     <div class="landscape-blocker">
@@ -2024,6 +2169,51 @@
     </section>
 
     <script>
+        // ─── PASSWORD GATE ────────────────────────────────────────────────
+        (function () {
+            var gate  = document.getElementById('password-gate');
+            var input = document.getElementById('gate-input');
+            var btn   = document.getElementById('gate-btn');
+            var errEl = document.getElementById('gate-error-msg');
+
+            // Already authenticated this session — hide immediately
+            if (sessionStorage.getItem('npv_v1_auth') === 'granted') {
+                gate.style.display = 'none';
+                return;
+            }
+
+            // Prevent page scroll while gate is visible
+            document.body.style.overflow = 'hidden';
+
+            function unlock() {
+                sessionStorage.setItem('npv_v1_auth', 'granted');
+                gate.classList.add('unlocked');
+                document.body.style.overflow = '';
+                setTimeout(function () { gate.style.display = 'none'; }, 900);
+            }
+
+            function attempt() {
+                var val = input.value.trim().toUpperCase();
+                if (val === 'DOMINICA') {
+                    unlock();
+                } else {
+                    input.classList.add('gate-error');
+                    errEl.classList.add('visible');
+                    input.value = '';
+                    setTimeout(function () { input.classList.remove('gate-error'); }, 500);
+                }
+            }
+
+            btn.addEventListener('click', attempt);
+            input.addEventListener('keydown', function (e) {
+                errEl.classList.remove('visible');
+                if (e.key === 'Enter') attempt();
+            });
+
+            // Auto-focus input after a beat
+            setTimeout(function () { input.focus(); }, 300);
+        })();
+
         // Get elements
         const chronicle = document.getElementById('chronicle');
         const needle = document.getElementById('needle');
