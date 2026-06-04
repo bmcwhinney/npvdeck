@@ -321,6 +321,20 @@
                 font-size: clamp(2.5rem, 12vw, 5rem) !important;
                 line-height: 1.1 !important;
             }
+            
+            /* ─── DISPLAY NUMBER HIERARCHY RESTORE ─────────────────────────────
+               p { 1rem !important } above kills ALL <p> sizes. These overrides
+               come later in the cascade so they win, restoring visual impact for
+               stat numbers while body text stays at the readable 1rem floor.    */
+            p.text-2xl { font-size: 1.35rem !important; line-height: 1.25 !important; }
+            p.text-3xl { font-size: 1.7rem !important;  line-height: 1.15 !important; }
+            p.text-4xl { font-size: 2.25rem !important; line-height: 1.1 !important; }
+            p.text-5xl { font-size: clamp(2.25rem, 10vw, 3.5rem) !important; line-height: 1.05 !important; }
+            p.text-6xl { font-size: clamp(2.5rem, 11vw, 4rem) !important;  line-height: 1.05 !important; }
+            p.text-7xl, p.text-8xl, p.text-9xl {
+                font-size: clamp(2.5rem, 12vw, 5rem) !important;
+                line-height: 1.05 !important;
+            }
         }
         
             .chronicle-line {
@@ -1781,35 +1795,35 @@
                     <p class="technical-label text-gray-400 mb-6 sm:mb-8">Capital Allocation</p>
                     <div class="space-y-3 sm:space-y-4">
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Construction</span>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Construction</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-npv-yellow" style="width: 56%"></div>
                             </div>
                             <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">56%</span>
                         </div>
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Interiors</span>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Interiors</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-black/30" style="width: 18%"></div>
                             </div>
                             <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">18%</span>
                         </div>
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Land</span>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Land</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-black/30" style="width: 14%"></div>
                             </div>
                             <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">14%</span>
                         </div>
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Landscaping</span>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Landscaping</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-black/20" style="width: 6%"></div>
                             </div>
                             <span class="text-[11px] font-sans font-bold text-black w-8 shrink-0">6%</span>
                         </div>
                         <div class="flex items-center gap-3 sm:gap-4">
-                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-24 sm:w-36 text-right shrink-0">Legal &amp; Marketing</span>
+                            <span class="text-[10px] font-sans font-semibold uppercase tracking-wider text-gray-500 w-28 sm:w-36 text-right shrink-0">Legal &amp; Marketing</span>
                             <div class="flex-1 h-1 bg-gray-100">
                                 <div class="h-full bg-black/20" style="width: 6%"></div>
                             </div>
