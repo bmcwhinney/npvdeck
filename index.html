@@ -2575,7 +2575,7 @@
                         mobileNavFab.classList.toggle('is-dark', theme === 'dark');
                     }
                     if (mobileNavMenuContent) {
-                        mobileNavMenuContent.classList.toggle('is-dark', theme === 'dark');
+                        mobileNavMenuContent.classList.remove('is-dark');
                     }
                     if (navLabel) {
                         navLabel.style.color = theme === 'dark' ? '#FFFFFF' : '#050505';
