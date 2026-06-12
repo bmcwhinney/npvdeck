@@ -2029,7 +2029,16 @@
             </div>
 
             <!-- Sensitivity Table -->
-            <div class="reveal overflow-x-auto -mx-1">
+            <div class="reveal">
+                <!-- Scroll hint — visible on mobile only, fades out on scroll -->
+                <div id="table-scroll-hint" class="flex items-center gap-2 mb-3 sm:hidden">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="text-gray-400 shrink-0"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span class="text-[10px] font-sans uppercase tracking-widest text-gray-400">Scroll to see full table</span>
+                </div>
+                <!-- Fade gradient on right edge — mobile only -->
+                <div class="relative">
+                    <div id="table-fade" class="pointer-events-none absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white to-transparent z-10 sm:hidden"></div>
+                    <div id="table-scroll" class="overflow-x-auto -mx-1" style="-webkit-overflow-scrolling: touch;">
                 <table class="w-full min-w-[560px]" style="border-collapse: collapse;">
                     <thead>
                         <tr style="border-bottom: 2px solid #050505;">
@@ -2124,6 +2133,8 @@
                         </tr>
                     </tbody>
                 </table>
+                    </div><!-- end overflow scroll -->
+                </div><!-- end relative fade wrapper -->
                 <p class="text-xs font-sans text-gray-500 mt-5 leading-relaxed max-w-3xl">* At exits above $740k, external investors receive their full $185k each. The "Residual Above Investor Claim" column shows what remains after the $740k investor priority is satisfied — this includes return of the sponsor's $100k contingency reserve (if undeployed) plus developer profit. Below $740k, all sale proceeds go to external investors via first charge; sponsor loses the $100k contingency before any external capital is touched. Projections are targets based on comparable market data; not guaranteed returns.</p>
             </div>
 
@@ -2678,6 +2689,18 @@
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(updateActiveSection, 50);
         }, { passive: true });
+
+        // Table scroll hint — hide fade + label once user scrolls the table
+        const tableScroll = document.getElementById('table-scroll');
+        const tableFade   = document.getElementById('table-fade');
+        const tableHint   = document.getElementById('table-scroll-hint');
+        if (tableScroll) {
+            tableScroll.addEventListener('scroll', function onTableScroll() {
+                if (tableFade) tableFade.style.opacity = '0';
+                if (tableHint) tableHint.style.opacity = '0';
+                tableScroll.removeEventListener('scroll', onTableScroll);
+            }, { passive: true });
+        }
 
         // Update on resize
         window.addEventListener('resize', () => {
